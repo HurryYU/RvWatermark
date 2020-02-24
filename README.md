@@ -16,7 +16,9 @@
 
 ### 1.1、Gradle引入
 
-待补全
+```xml
+implementation 'com.hurryyu:RvWatermark:1.0'
+```
 
 ### 1.2、简单使用
 
