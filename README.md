@@ -17,7 +17,7 @@
 ### 1.1、Gradle引入
 
 ```xml
-implementation 'com.hurryyu:RvWatermark:1.0'
+implementation 'com.hurryyu:RvWatermark:1.1'
 ```
 
 ### 1.2、简单使用
@@ -76,9 +76,9 @@ new RvWatermark.Builder(drawable).build().bindToRecyclerView(recyclerView);
 
 ```kotlin
 RvWatermark.build(drawable) {
-    isFollowScroll = true
-    watermarkColumnNumber = 3
-    watermarkRowHeight = 120
+    isFollowScroll(true)
+    watermarkColumnNumber(3)
+    watermarkRowHeight(120)
 }.bindToRecyclerView(recyclerView)
 ```
 
@@ -86,16 +86,16 @@ RvWatermark.build(drawable) {
 
 ```java
 new RvWatermark.Builder(drawable)
-        .setIsFollowScroll(true)
-        .setWatermarkColumnNumber(3)
-        .setWatermarkRowHeight(120)
+        .isFollowScroll(true)
+        .watermarkColumnNumber(3)
+        .watermarkRowHeight(120)
         .build()
         .bindToRecyclerView(recyclerView);
 ```
 
 ### 2.2、文字水印特有属性
 
-文字水印的属性设置在创建`TextWatermarkDrawable`进行，如果您想设置不同文字内容的水印，可传入字符串数组，若您只需显示同一文本内容，直接传入字符串即可。
+文字水印的属性设置在创建`TextWatermarkDrawable`进行，如果您想设置多个不同文字内容的水印，可在`build`中传入多个字符串，若您只需显示同一文本内容，直接传入字符串即可。
 
 除此之外，我们还可以设置：
 
@@ -110,10 +110,10 @@ new RvWatermark.Builder(drawable)
 
 ```kotlin
 val drawable = TextWatermarkDrawable.build("HurryYu") {
-    watermarkTextAlpha = 0.5F
-    watermarkTextColor = Color.GRAY
-    watermarkTextSize = 12
-    watermarkTextDegrees = -30F
+    watermarkTextAlpha(0.5F)
+    watermarkTextColor(Color.GRAY)
+    watermarkTextDegrees(-30F)
+    watermarkTextSize(12F)
 }
 ```
 
@@ -122,10 +122,10 @@ val drawable = TextWatermarkDrawable.build("HurryYu") {
 ```java
 TextWatermarkDrawable drawable =
         new TextWatermarkDrawable.Builder("HurryYu")
-                .setWatermarkTextAlpha(0.5F)
-                .setWatermarkTextColor(Color.GRAY)
-                .setWatermarkTextDegrees(-30)
-                .setWatermarkTextSize(12)
+                .watermarkTextAlpha(0.5F)
+                .watermarkTextColor(Color.GRAY)
+                .watermarkTextDegrees(-30)
+                .watermarkTextSize(12F)
                 .build();
 ```
 
@@ -141,9 +141,9 @@ TextWatermarkDrawable drawable =
 
 ```kotlin
 val drawable = BitmapWatermarkDrawable.build(bitmap) {
-    watermarkBitmapAlpha = 0.5F
-    watermarkBitmapDegrees = 0F
-    watermarkBitmapScaleValue = 1F
+    watermarkBitmapAlpha(0.5F)
+    watermarkBitmapDegrees(0F)
+    watermarkBitmapScaleValue(1F)
 }
 ```
 
@@ -152,15 +152,17 @@ val drawable = BitmapWatermarkDrawable.build(bitmap) {
 ```java
 BitmapWatermarkDrawable drawable =
         new BitmapWatermarkDrawable.Builder(bitmap)
-                .setWatermarkBitmapAlpha(0.5F)
-                .setWatermarkBitmapDegrees(0)
-                .setWatermarkBitmapScaleValue(1)
+                .watermarkBitmapAlpha(0.5F)
+                .watermarkBitmapDegrees(0)
+                .watermarkBitmapScaleValue(1)
                 .build();
 ```
 
 ## 三、自定义水印
 
-如果本框架提供的水印样式不符合您的要求，您可以自定义。只需要继承`BaseWatermarkDrawable`类，在`draw`方法中进行绘制就可以了。您可以通过`currentDrawIndex`（Java需调用`getCurrentDrawIndex()`）来得知您当前正在绘制第几个下标的水印。
+如果本框架提供的水印样式不符合您的要求，您可以自定义。只需要继承`BaseWatermarkDrawable`类，在`draw`方法中进行绘制就可以了。您可以通过`currentDrawIndex()`方法来得知您当前正在绘制第几个下标的水印；您可以通过`bounds`（`java`中需要调用`getBounds()`方法）来获得绘制内容的位置。
+
+注意，`Rect`中`left`、`top`、`right`、`bottom`都是相对于`RecyclerView`左上角的坐标位置，您可以通过`rect.bottom - (rect.bottom - rect.top) / 2F`来得到绘制区域的中点坐标。
 
 ## 四、谢谢
 

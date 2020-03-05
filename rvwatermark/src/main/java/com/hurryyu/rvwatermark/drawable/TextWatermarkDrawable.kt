@@ -18,8 +18,8 @@ class TextWatermarkDrawable private constructor(
     watermarkTextColor: Int,
     watermarkTextSize: Int,
     watermarkTextAlpha: Float,
-    private val watermarkTextDegrees: Float,
-    private vararg val watermarkText: String
+    @get:JvmName("watermarkTextDegrees") val watermarkTextDegrees: Float,
+    @get:JvmName("watermarkText") vararg val watermarkText: String
 ) : BaseWatermarkDrawable() {
 
     private val paint: Paint = Paint(Paint.ANTI_ALIAS_FLAG)
@@ -75,34 +75,26 @@ class TextWatermarkDrawable private constructor(
         canvas.restore()
     }
 
-    class Builder(vararg val watermarkText: String) {
-        @JvmField
-        var watermarkTextColor: Int = Color.GRAY
-        @JvmField
-        var watermarkTextSize: Int = sp2px(12F)
-        @JvmField
-        var watermarkTextAlpha: Float = 0.5F
-        @JvmField
-        var watermarkTextDegrees: Float = -30F
+    class Builder(internal vararg val watermarkText: String) {
+        internal var watermarkTextColor: Int = Color.GRAY
+        internal var watermarkTextSize: Int = sp2px(12F)
+        internal var watermarkTextAlpha: Float = 0.5F
+        internal var watermarkTextDegrees: Float = -30F
 
-        fun setWatermarkTextColor(watermarkTextColor: Int): Builder {
+        fun watermarkTextColor(watermarkTextColor: Int) = apply {
             this.watermarkTextColor = watermarkTextColor
-            return this
         }
 
-        fun setWatermarkTextSize(watermarkTextSize: Float): Builder {
+        fun watermarkTextSize(watermarkTextSize: Float) = apply {
             this.watermarkTextSize = sp2px(watermarkTextSize)
-            return this
         }
 
-        fun setWatermarkTextAlpha(watermarkTextAlpha: Float): Builder {
+        fun watermarkTextAlpha(watermarkTextAlpha: Float) = apply {
             this.watermarkTextAlpha = watermarkTextAlpha
-            return this
         }
 
-        fun setWatermarkTextDegrees(watermarkTextDegrees: Float): Builder {
+        fun watermarkTextDegrees(watermarkTextDegrees: Float) = apply {
             this.watermarkTextDegrees = watermarkTextDegrees
-            return this
         }
 
         fun build(): TextWatermarkDrawable {

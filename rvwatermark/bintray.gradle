@@ -5,7 +5,7 @@ publish {
     repoName = rootProject.repoName
     artifactId = 'RvWatermark'
     groupId = rootProject.groupId
-    publishVersion = 1.0
+    publishVersion = 1.1
     desc = '优雅的实现RecyclerView水印效果，支持文字、图片、自定义水印'
     website = rootProject.website
 }

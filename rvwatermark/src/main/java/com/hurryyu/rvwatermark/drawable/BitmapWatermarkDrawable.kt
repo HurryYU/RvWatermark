@@ -15,12 +15,11 @@ import android.graphics.Paint
  * ===================================================================
  */
 class BitmapWatermarkDrawable(
-    private val bitmap: Bitmap,
-    private val scaleValue: Float,
+    @get:JvmName("bitmap") val bitmap: Bitmap,
+    @get:JvmName("scaleValue") val scaleValue: Float,
     alpha: Float,
-    private val degrees: Float
-) :
-    BaseWatermarkDrawable() {
+    @get:JvmName("degrees") val degrees: Float
+) : BaseWatermarkDrawable() {
 
     private val paint = Paint(Paint.ANTI_ALIAS_FLAG)
     private val matrix = Matrix()
@@ -56,27 +55,21 @@ class BitmapWatermarkDrawable(
         canvas.restore()
     }
 
-    class Builder(val bitmap: Bitmap) {
-        @JvmField
-        var watermarkBitmapScaleValue: Float = 1F
-        @JvmField
-        var watermarkBitmapAlpha: Float = 0.5F
-        @JvmField
-        var watermarkBitmapDegrees: Float = 0F
+    class Builder(internal val bitmap: Bitmap) {
+        internal var watermarkBitmapScaleValue: Float = 1F
+        internal var watermarkBitmapAlpha: Float = 0.5F
+        internal var watermarkBitmapDegrees: Float = 0F
 
-        fun setWatermarkBitmapScaleValue(watermarkBitmapScaleValue: Float): Builder {
+        fun watermarkBitmapScaleValue(watermarkBitmapScaleValue: Float) = apply {
             this.watermarkBitmapScaleValue = watermarkBitmapScaleValue
-            return this
         }
 
-        fun setWatermarkBitmapAlpha(watermarkBitmapAlpha: Float): Builder {
+        fun watermarkBitmapAlpha(watermarkBitmapAlpha: Float) = apply {
             this.watermarkBitmapAlpha = watermarkBitmapAlpha
-            return this
         }
 
-        fun setWatermarkBitmapDegrees(watermarkBitmapDegrees: Float): Builder {
+        fun watermarkBitmapDegrees(watermarkBitmapDegrees: Float) = apply {
             this.watermarkBitmapDegrees = watermarkBitmapDegrees
-            return this
         }
 
         fun build(): BitmapWatermarkDrawable {

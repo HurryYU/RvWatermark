@@ -37,21 +37,21 @@ class MainActivity : AppCompatActivity() {
     private fun addWatermark(recyclerView: RecyclerView) {
 //        val bitmap = BitmapFactory.decodeResource(resources, R.drawable.icon_android)
 //        val drawable = BitmapWatermarkDrawable.build(bitmap) {
-//            // watermarkBitmapAlpha = 0.5F
-//            // watermarkBitmapDegrees = 0F
-//            // watermarkBitmapScaleValue = 1F
+//            watermarkBitmapAlpha(0.5F)
+//            watermarkBitmapDegrees(0F)
+//            watermarkBitmapScaleValue(1F)
 //        }
 
         val drawable = TextWatermarkDrawable.build("HurryYu") {
-            // watermarkTextAlpha = 0.5F
-            // watermarkTextColor = Color.GRAY
-            // watermarkTextSize = 12
-            // watermarkTextDegrees = -30F
+//            watermarkTextAlpha(0.5F)
+//            watermarkTextColor(Color.GRAY)
+//            watermarkTextSize(12F)
+//            watermarkTextDegrees(-30F)
         }
         RvWatermark.build(drawable) {
-            // isFollowScroll = true
-            // watermarkColumnNumber = 3
-            // watermarkRowHeight = 120
+//            isFollowScroll(true)
+//            watermarkColumnNumber(3)
+//            watermarkRowHeight(120)
         }.bindToRecyclerView(recyclerView)
     }
 

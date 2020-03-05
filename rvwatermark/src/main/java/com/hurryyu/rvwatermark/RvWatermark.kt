@@ -16,10 +16,10 @@ import kotlin.math.ceil
  * ===================================================================
  */
 class RvWatermark private constructor(
-    private val drawable: BaseWatermarkDrawable,
-    private val watermarkColumnNumber: Int,
-    private val watermarkRowHeight: Int,
-    private val isFollowScroll: Boolean
+    @get:JvmName("drawable") val drawable: BaseWatermarkDrawable,
+    @get:JvmName("watermarkColumnNumber") val watermarkColumnNumber: Int,
+    @get:JvmName("watermarkRowHeight") val watermarkRowHeight: Int,
+    @get:JvmName("isFollowScroll") val isFollowScroll: Boolean
 ) : RecyclerView.ItemDecoration() {
 
     private var scrollY = 0
@@ -76,28 +76,21 @@ class RvWatermark private constructor(
         }
     }
 
-    class Builder(val drawable: BaseWatermarkDrawable) {
-        // 屏蔽自动生成的get&set,方便java
-        @JvmField
-        var watermarkColumnNumber = 3
-        @JvmField
-        var watermarkRowHeight = dp2px(120F)
-        @JvmField
-        var isFollowScroll = true
+    class Builder(internal val drawable: BaseWatermarkDrawable) {
+        internal var watermarkColumnNumber = 3
+        internal var watermarkRowHeight = dp2px(120F)
+        internal var isFollowScroll = true
 
-        fun setWatermarkColumnNumber(watermarkColumnNumber: Int): Builder {
+        fun watermarkColumnNumber(watermarkColumnNumber: Int) = apply {
             this.watermarkColumnNumber = watermarkColumnNumber
-            return this
         }
 
-        fun setWatermarkRowHeight(watermarkRowHeight: Int): Builder {
+        fun watermarkRowHeight(watermarkRowHeight: Int) = apply {
             this.watermarkRowHeight = dp2px(watermarkRowHeight.toFloat())
-            return this
         }
 
-        fun setIsFollowScroll(isFollowScroll: Boolean): Builder {
+        fun isFollowScroll(isFollowScroll: Boolean) = apply {
             this.isFollowScroll = isFollowScroll
-            return this
         }
 
         fun build() = RvWatermark(this)

@@ -14,7 +14,9 @@ import android.graphics.drawable.Drawable
  * ===================================================================
  */
 abstract class BaseWatermarkDrawable : Drawable() {
-    var currentDrawIndex = 0
+    internal var currentDrawIndex = -1
+
+    fun currentDrawIndex() = currentDrawIndex
 
     override fun setAlpha(alpha: Int) {
     }
